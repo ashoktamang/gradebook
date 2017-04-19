@@ -1,0 +1,10 @@
+Use blah.sql file and check if all the required tables and sample table exist
+// Create database in your local server
+mysql -u root -p
+// In mysql command monitor
+create database gradebook;
+
+// Separate shell env
+mysql -u root -p gradebook < blah.sql
+
+
