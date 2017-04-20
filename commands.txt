@@ -33,4 +33,19 @@ UPDATE scores st
     where assignmentid = 1 
     and s.lastname like '%Q%';
 
+// get count
+select count(*) from scores s left join assignments a on s.assignmentid = a.assignmentid join distribution d on d.distributionid = a.distributionid where courseid=3 and studentid=1
+    -> group by d.distributionid;
+
+
+select sum((s.points/a.PointsPossible) * (d.percent/c.counter)) from scores s 
+left join assignments a on s.assignmentid = a.assignmentid 
+join distribution d on d.distributionid = a.distributionid 
+join (select d.distributionid, count(*) as counter from scores s 
+        left join assignments a on s.assignmentid = a.assignmentid 
+        join distribution d on d.distributionid = a.distributionid 
+        where courseid=3 and studentid=1 group by d.distributionid) 
+        c on c.distributionid= d.distributionid 
+where courseid=3 
+and studentid=1;
 
