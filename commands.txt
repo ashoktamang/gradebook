@@ -37,6 +37,11 @@ UPDATE scores st
 select count(*) from scores s left join assignments a on s.assignmentid = a.assignmentid join distribution d on d.distributionid = a.distributionid where courseid=3 and studentid=1
     -> group by d.distributionid;
 
+select * from scores s left 
+    join assignments a on s.assignmentid = a.assignmentid 
+    join distribution d on d.distributionid = a.distributionid 
+    where courseid=3 and studentid=1;
+
 
 select sum((s.points/a.PointsPossible) * (d.percent/c.counter)) from scores s 
 left join assignments a on s.assignmentid = a.assignmentid 
@@ -48,4 +53,49 @@ join (select d.distributionid, count(*) as counter from scores s
         c on c.distributionid= d.distributionid 
 where courseid=3 
 and studentid=1;
+
+select if(
+    (d.category='Project' and s.points/a.PointsPossible<=lw.low), 
+    'true', 'false')
+from scores s 
+left join assignments a on s.assignmentid = a.assignmentid 
+join distribution d on d.distributionid = a.distributionid 
+join (select d.distributionid, count(*) as counter from scores s 
+        left join assignments a on s.assignmentid = a.assignmentid 
+        join distribution d on d.distributionid = a.distributionid 
+        where courseid=3 and studentid=1 group by d.distributionid) 
+        c on c.distributionid= d.distributionid 
+join (select d.distributionid, min(s.points/a.PointsPossible) as low from scores s 
+        left join assignments a on s.assignmentid = a.assignmentid 
+        join distribution d on d.distributionid = a.distributionid 
+        where courseid=3 and studentid=1 group by d.distributionid) 
+        lw on lw.distributionid= d.distributionid 
+where courseid=3 
+and studentid=1;
+
+
+select sum(
+    if(
+        (d.category='Project' and s.points/a.PointsPossible<=lw.low), 
+        d.percent/c.counter, 
+        (s.points/a.PointsPossible) * (d.percent/c.counter)
+    )
+) as final_grade
+from scores s 
+left join assignments a on s.assignmentid = a.assignmentid 
+join distribution d on d.distributionid = a.distributionid 
+join (select d.distributionid, count(*) as counter from scores s 
+        left join assignments a on s.assignmentid = a.assignmentid 
+        join distribution d on d.distributionid = a.distributionid 
+        where courseid=3 and studentid=1 group by d.distributionid) 
+        c on c.distributionid= d.distributionid 
+join (select d.distributionid, min(s.points/a.PointsPossible) as low from scores s 
+        left join assignments a on s.assignmentid = a.assignmentid 
+        join distribution d on d.distributionid = a.distributionid 
+        where courseid=3 and studentid=1 group by d.distributionid) 
+        lw on lw.distributionid= d.distributionid 
+where courseid=3 
+and studentid=1;
+
+
 
