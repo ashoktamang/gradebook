@@ -1,0 +1,36 @@
+MAX: SELECT MAX(POINTS) FROM scores WHERE assignmentID=value
+MIN: SELECT MIN(POINTS) FROM scores WHERE assignmentID=value
+AVG: SELECT AVG(POINTS) FROM scores WHERE assignmentID=value
+
+SELECT s.* 
+FROM Enrollment e
+JOIN Students s ON e.StudentID = s.StudentID
+WHERE e.courseID = value;
+
+SELECT st.*, s.fName, s.lName, s.major  
+FROM scores st 
+JOIN Students s ON s.StudentID = st.StudentID 
+JOIN registration e ON e.StudentID = st.StudentID 
+WHERE e.courseID=value;
+
+INSERT into Assignments (DistributionID, Instance, PointsPossible) VALUES (V1, V2, V3);
+
+update distribution
+    set percent=35
+    where DistributionID=12;
+
+update distribution
+    set percent=25
+    where DistributionID=16;
+
+UPDATE scores
+    SET points = points + 2
+    WHERE Assignmentid = value;
+
+UPDATE scores st 
+    join students s on s.studentid = st.studentid 
+    set points = points + 2 
+    where assignmentid = 1 
+    and s.lastname like '%Q%';
+
+
