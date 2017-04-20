@@ -85,15 +85,15 @@ DROP TABLE IF EXISTS `students`;
 
 CREATE TABLE `students` (
   `studentID` int(11) NOT NULL,
-  `fName` varchar(30) NOT NULL,
   `lName` varchar(30) NOT NULL,
+  `FName` varchar(30) NOT NULL,
   `Major` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`studentID`)
 );
 
 LOCK TABLES `students` WRITE;
 
-INSERT INTO `students` VALUES (1,'Tamang','Ashok','Computer Science\r'),(2,'Potter','Harry','Physics\r'),(3,'Hathaway','Anna','Theaters\r'),(4,'Micheam','Hermoine','Wizardry\r'),(5,'Gautam','Gauri','Chemistry\r'),(6,'Ponting','Ricky','Physics\r'),(7,'Williams','Serena','English');
+INSERT INTO `students` VALUES (1,'Tamang','Ashok','Computer Science\r'),(2,'Potter','Harry','Physics\r'),(3,'Hathaway','Anna','Theaters\r'),(4,'Micheam','Hermoine','Wizardry\r'),(5,'Quack','Gauri','Chemistry\r'),(6,'Ponting','Ricky','Physics\r'),(7,'Williams','Serena','English');
 
 
 UNLOCK TABLES;
