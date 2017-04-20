@@ -42,7 +42,7 @@ select * from scores s left
     join distribution d on d.distributionid = a.distributionid 
     where courseid=3 and studentid=1;
 
-
+//task11
 select sum((s.points/a.PointsPossible) * (d.percent/c.counter)) from scores s 
 left join assignments a on s.assignmentid = a.assignmentid 
 join distribution d on d.distributionid = a.distributionid 
@@ -54,6 +54,7 @@ join (select d.distributionid, count(*) as counter from scores s
 where courseid=3 
 and studentid=1;
 
+//experiment
 select if(
     (d.category='Project' and s.points/a.PointsPossible<=lw.low), 
     'true', 'false')
@@ -73,7 +74,7 @@ join (select d.distributionid, min(s.points/a.PointsPossible) as low from scores
 where courseid=3 
 and studentid=1;
 
-
+//task12
 select sum(
     if(
         (d.category='Project' and s.points/a.PointsPossible<=lw.low), 
